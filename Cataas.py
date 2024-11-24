@@ -2,10 +2,6 @@ from tkinter import*
 from PIL import Image, ImageTk# PIL, для работы с изображениями
 import requests# для получения информации из интернета
 from io import BytesIO# библиотека io import позволяет работать с вводом/выводом
-
-from Scripts.Notepade_01 import window, file_menu
-
-
 # информации, а BytesIO с двойничными единичками, ноликами, байтами
 
 
@@ -30,10 +26,17 @@ def load_image(url):
         return None
 
 
-def set_image():# отдельная функция, вызывающая load_image и устанавливать изображение в метку
+# def set_image():# отдельная функция, вызывающая load_image и устанавливать изображение в метку
+# разные изображения открываются в одном окне
+def open_new_window():
     img=load_image(url)
     if img:
-        label.config(image=img)# устанавливаем картинку на метку
+        new_window=Toplevel()
+        new_window.title("Картинка с котиком")
+        new_window.geometry("600x480")
+        label = Label(new_window, image=img)# указываем, что теперь в новом окне
+        label.pack()
+        # label.config(image=img)# устанавливаем картинку на метку
         label.image = img# чтобы "сборщик мусора" не посчитал картинку таковым
 
 
@@ -44,8 +47,6 @@ def exit():
 window.Tk()
 window.title(text="Cats!")
 window.geometry("600x520")
-label=Label()
-label.pack()
 
 # update_button=Button(text="Обновить", command=set_image)
 # update_button.pack()
@@ -55,11 +56,10 @@ window.config(menu=menu_bar)
 
 file_menu=Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label="Файл", menu=file_menu)
-file_menu.add_command(label="Загрузить фото", command=set_image)
+file_menu.add_command(label="Загрузить фото", command=open_new_window)
 file_menu.add_separator()
 # метод add_separator добавляет линию разделитель в меню
 file_menu.add_command(label="Выход", command=exit)
-
 
 url="https://cataas.com/cat"
 
