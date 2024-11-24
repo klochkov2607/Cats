@@ -15,6 +15,10 @@ def load_image(url):
 #сам контент этого ответа (сама картинка) будет преобразована с помощью BytesIO
         img=Image.open(image_data)
 #img, локальная переменная (внутри функции), image_data, из библиотеки pillow
+        img.thumbnail((600, 480), Image.Resampling.LANCZOS)#подгоняем изображение под размер
+#в кортеже указываем размер изображения который хотим получить
+#Resampling.LANCZOS, способ по которому изображение будет конвертироваться, при котором
+#качество изображения не очень будет страдать при сжатии
         return ImageTk.PhotoImage(img)#функция возвращает Image картинку img, а дальше эту
 #картинку положим в img=load_image(url) и это отобразится в метке label
     except Exception as e:
@@ -29,10 +33,9 @@ def set_image():#отдельная функция, вызывающая load_im
         label.config(image=img)  # устанавливаем картинку на метку
         label.image = img  # чтобы "сборщик мусора" не посчитал картинку таковым
 
-
 window.Tk()
 window.title(text="Cats!")
-window.geometry("600x480")
+window.geometry("600x520")
 label=Label()
 label.pack()
 
