@@ -55,11 +55,8 @@ window.geometry("600x520")
 # update_button=Button(text="Обновить", command=set_image)
 # update_button.pack()
 
-tag_entry=Entry()
-tag_entry.pack()
-
-load_button=Button(text="Загрузить по тегу", command=open_new_window)
-load_button.pack()
+# tag_entry=Entry()
+# tag_entry.pack()
 
 menu_bar=Menu(window)
 window.config(menu=menu_bar)
@@ -77,10 +74,13 @@ url="https://cataas.com/cat"
 # картинка при запуске проекта
 
 tag_label=Label(text="Выбери тег")
-tag.label.pack()
+tag_label.pack()
 
 tag_combobox=ttk.Combobox(values=Allowed_tags)
 tag_combobox.pack()
+
+load_button=Button(text="Загрузить по тегу", command=open_new_window)
+load_button.pack()
 
 window.mainloop()
 
