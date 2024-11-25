@@ -29,7 +29,9 @@ def load_image(url):
 # def set_image():# отдельная функция, вызывающая load_image и устанавливать изображение в метку
 # разные изображения открываются в одном окне
 def open_new_window():
-    img=load_image(url)
+    tag=tag_entry.get()
+    url_tag=f"https://cataas.com/cat/{tag}"
+    img=load_image(url_tag)
     if img:
         new_window=Toplevel()
         new_window.title("Картинка с котиком")
@@ -47,9 +49,14 @@ def exit():
 window.Tk()
 window.title(text="Cats!")
 window.geometry("600x520")
-
 # update_button=Button(text="Обновить", command=set_image)
 # update_button.pack()
+
+tag_entry=Entry()
+tag_entry.pack()
+
+load_button=Button(text="Загрузить по тегу", command=open_new_window)
+load_button.pack()
 
 menu_bar=Menu(window)
 window.config(menu=menu_bar)
@@ -63,7 +70,7 @@ file_menu.add_command(label="Выход", command=exit)
 
 url="https://cataas.com/cat"
 
-set_image()# когда запускаем первый раз функция должна быть вызвана, чтобы появилась первая
+# set_image()# когда запускаем первый раз функция должна быть вызвана, чтобы появилась первая
 # картинка при запуске проекта
 
 window.mainloop()
