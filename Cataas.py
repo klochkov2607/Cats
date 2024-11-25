@@ -1,8 +1,11 @@
 from tkinter import*
+from tkinter import ttk# ttk, набор улучшеннных виджетов
 from PIL import Image, ImageTk# PIL, для работы с изображениями
 import requests# для получения информации из интернета
 from io import BytesIO# библиотека io import позволяет работать с вводом/выводом
 # информации, а BytesIO с двойничными единичками, ноликами, байтами
+
+Allowed_tags=["sleep", "jump", "fight", "black", "white", "siamese", "cute"]# список, через запятую
 
 
 def load_image(url):
@@ -29,8 +32,8 @@ def load_image(url):
 # def set_image():# отдельная функция, вызывающая load_image и устанавливать изображение в метку
 # разные изображения открываются в одном окне
 def open_new_window():
-    tag=tag_entry.get()
-    url_tag=f"https://cataas.com/cat/{tag}"
+    tag=tag_combobox.get()
+    url_tag=f"https://cataas.com/cat/{tag}" if tag else "https://cataas.com/cat"
     img=load_image(url_tag)
     if img:
         new_window=Toplevel()
@@ -72,6 +75,12 @@ url="https://cataas.com/cat"
 
 # set_image()# когда запускаем первый раз функция должна быть вызвана, чтобы появилась первая
 # картинка при запуске проекта
+
+tag_label=Label(text="Выбери тег")
+tag.label.pack()
+
+tag_combobox=ttk.Combobox(values=Allowed_tags)
+tag_combobox.pack()
 
 window.mainloop()
 
